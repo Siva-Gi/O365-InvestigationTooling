@@ -1,11 +1,11 @@
 ﻿#Import the right module to talk with AAD
-import-module MSOnline
+#import-module MSOnline
 
 #Let's get us an admin cred!
-$userCredential = Get-Credential
+#$userCredential = Get-Credential
 
 #This connects to Azure Active Directory
-Connect-MsolService -Credential $userCredential
+#Connect-MsolService -Credential $userCredential
 
 $ExoSession = New-PSSession -ConfigurationName Microsoft.Exchange -ConnectionUri https://outlook.office365.com/powershell-liveid/ -Credential $userCredential -Authentication Basic -AllowRedirection
 Import-PSSession $ExoSession
