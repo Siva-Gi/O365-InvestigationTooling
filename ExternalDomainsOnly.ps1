@@ -19,6 +19,7 @@ $UserDelegates = @()
 foreach ($User in $allUsers)
 {
     Write-Host "Checking inbox rules and delegates for user: " $User.UserPrincipalName;
-    Get-InboxRule -Mailbox $User.UserPrincipalname | Select $User.UserPrincipalname, Name, Description, Enabled, Priority, ForwardTo, ForwardAsAttachmentTo, RedirectTo, DeleteMessage | Where-Object {($_.ForwardTo -ne $null) -or ($_.ForwardAsAttachmentTo -ne $null) -or ($_.RedirectsTo -ne $null)}
+    $UserInboxRules +=  Get-InboxRule -Mailbox $User.UserPrincipalname | Select $User.UserPrincipalname, Name, Description, Enabled, Priority, ForwardTo, ForwardAsAttachmentTo, RedirectTo, DeleteMessage | Where-Object {($_.ForwardTo -ne $null) -or ($_.ForwardAsAttachmentTo -ne $null) -or ($_.RedirectsTo -ne $null)}
 }
 
+$UserInboxRules | Export-Csv MailForwardingRulesToExternalDomains.csv
